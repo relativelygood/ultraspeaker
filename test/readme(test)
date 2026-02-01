@@ -1,0 +1,25 @@
+// ----------------
+// File: README.md
+// ----------------
+# ESP32 Ultrasonic Bluetooth Speaker
+
+## Description
+Bluetooth A2DP sink that demodulates audio into an ultrasonic AM PWM carrier.
+
+## Features
+- Bluetooth A2DP (SBC)
+- Envelope detection
+- 40 kHz ultrasonic PWM carrier
+
+## Hardware
+- ESP32-WROOM-32E
+- Ultrasonic transducer + driver
+
+## Build
+```bash
+platformio run -t upload
+```
+
+## Notes
+- Phone volume controls loudness
+- Envelope-only audio (speech optimized)
