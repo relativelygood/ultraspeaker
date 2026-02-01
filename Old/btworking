@@ -41,4 +41,4 @@ void setup() {
 }
 
 void loop() {}
-// This code sets up an ESP32 as a Bluetooth A2DP sink using the AudioTools library. It configures the I2S output for audio playback and defines a callback function to analyze incoming audio data for audio presence, printing a message to the Serial Monitor when audio is detected.
+// This code sets up an ESP32 as a Bluetooth A2DP sink using the AudioTools library. It configures the I2S output for audio playback and defines a callback function to analyze incoming audio data for audio presence, printing a message to the Serial Monitor when audio is detected. 
