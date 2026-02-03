@@ -10,8 +10,8 @@ static const int FC      = 40000;
 static const int FS_ENV  = 16000;
 
 static const int PWM_MAX = (1 << PWM_RES) - 1;
-static const int DUTY_MIN = (PWM_MAX * 10) / 100;
-static const int DUTY_MAX = (PWM_MAX * 90) / 100;
+static const int DUTY_MIN = (PWM_MAX * 12) / 100;
+static const int DUTY_MAX = (PWM_MAX * 82) / 100;
 
 static hw_timer_t *timer = nullptr;
 static portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
@@ -29,6 +29,7 @@ void IRAM_ATTR onTimer() {
 
   uint32_t duty = DUTY_MIN + (env_sample * (DUTY_MAX - DUTY_MIN)) / PWM_MAX;
   duty = clamp_u16(duty, DUTY_MIN, DUTY_MAX);
+  // Serial.println(duty);
   ledcWrite(PWM_CH, duty);
 
   portEXIT_CRITICAL_ISR(&timerMux);
