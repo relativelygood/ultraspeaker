@@ -4,15 +4,15 @@
 // ======================= User settings =======================
 static const int PWM_PIN = 18;
 static const int PWM_CH  = 0;
-static const int PWM_RES = 10;
+static const int PWM_RES = 9;
 
 static const int FC      = 40000;   // ultrasonic carrier (LEDC base freq)
 static const int FS_ENV  = 40000;   // envelope sample rate
 
 // Duty limits
 static const int PWM_MAX  = (1 << PWM_RES) - 1;
-static const int DUTY_MIN = (PWM_MAX * 12) / 100;
-static const int DUTY_MAX = (PWM_MAX * 82) / 100;
+static const int DUTY_MIN = (PWM_MAX * 1) / 100;
+static const int DUTY_MAX = (PWM_MAX * 99) / 100;
 
 // ======================= Globals ============================
 BluetoothA2DPSink a2dp;
@@ -95,20 +95,20 @@ void audio_data_callback(const uint8_t *data, uint32_t len) {
   const int16_t *pcm = (const int16_t *)data;
   uint32_t frames = len / 4; // stereo 16-bit
 
-  static int32_t lp = 0;     // simple LPF state
+  // static int32_t lp = 0;     // simple LPF state
 
   for (uint32_t i = 0; i < frames; i++) {
     int32_t l = pcm[2 * i];
-    int32_t r = pcm[2 * i + 1];
+    // int32_t r = pcm[2 * i + 1];
 
-    int32_t mono = (l + r) >> 1;
+    // int32_t mono = (l + r) >> 1;
 
     // simple lowpass to tame aliasing
-    lp += (mono - lp) >> 3;
-    int16_t out = (int16_t)lp;
+    //lp += (mono - lp) >> 3;
+    //int16_t out = (int16_t)lp;
 
     portENTER_CRITICAL(&timerMux);
-    rb_push(out);
+    rb_push(l);
     portEXIT_CRITICAL(&timerMux);
   }
 }
